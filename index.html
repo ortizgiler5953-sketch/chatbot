@@ -1,0 +1,235 @@
+:Mueblería Ortiz - Chatbot Gótico:muebleria_ortiz_gothic_chatbot.html
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mueblería Ortiz - Mobiliario Gótico & Reembolsos</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Fuentes de estilo gótico, medieval y místico -->
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700;900&family=Metamorphic&family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        gothic: ['Cinzel Decorative', 'serif'],
+                        medieval: ['Metamorphic', 'serif'],
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                    },
+                    colors: {
+                        goth: {
+                            black: '#09090b',       /* Negro abisal */
+                            charcoal: '#121214',    /* Carbón oscuro */
+                            stone: '#1e1e24',       /* Piedra gótica */
+                            blood: '#7f1d1d',       /* Rojo sangre */
+                            crimson: '#b91c1c',     /* Carmesí místico */
+                            pewter: '#94a3b8',      /* Plata vieja / Peltre */
+                            parchment: '#f5f5f4',   /* Pergamino claro */
+                            darkGold: '#854d0e',    /* Oro viejo */
+                            gold: '#ca8a04'         /* Oro pulido */
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #09090b;
+            background-image: radial-gradient(circle at 50% 50%, #1e1b4b 0%, #09090b 80%);
+        }
+        
+        .gothic-border {
+            border-image: linear-gradient(to bottom, #ca8a04, #7f1d1d, #09090b) 1;
+        }
+
+        /* Scrollbar personalizado de estilo catedralicio */
+        .custom-scrollbar::-webkit-scrollbar {
+            width: 5px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-track {
+            background: #121214;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb {
+            background: #7f1d1d;
+            border-radius: 4px;
+        }
+        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
+            background: #b91c1c;
+        }
+
+        /* Animación de titileo de velas medievales */
+        @keyframes flicker {
+            0%, 100% { opacity: 0.8; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.05) translateY(-1px); }
+        }
+        .candle-flicker {
+            animation: flicker 2s infinite ease-in-out;
+        }
+    </style>
+</head>
+<body class="font-sans text-stone-200 antialiased selection:bg-goth-blood selection:text-white min-h-screen flex flex-col">
+
+    <!-- NOTIFICACIÓN TIPO TOAST -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 ease-out bg-goth-stone text-white px-5 py-4 rounded-xl shadow-2xl flex items-center gap-3 border border-goth-blood/50 pointer-events-none">
+        <div class="p-1.5 bg-goth-blood/20 rounded-lg text-goth-crimson">
+            <i data-lucide="skull" class="w-5 h-5"></i>
+        </div>
+        <div>
+            <span id="toast-message" class="text-xs font-bold tracking-wider block">Acción completada</span>
+        </div>
+    </div>
+
+    <!-- HEADER DE LA CATEDRAL / NAVBAR -->
+    <header class="bg-goth-black/95 border-b border-goth-blood/30 sticky top-0 z-40 backdrop-blur-md">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
+            <div class="flex items-center gap-3">
+                <span class="font-gothic text-lg sm:text-2xl tracking-widest text-white hover:text-goth-crimson transition-colors duration-500 cursor-pointer">
+                    MUEBLERÍA ORTIZ
+                </span>
+            </div>
+            <div class="hidden md:flex items-center gap-8 text-[11px] font-bold uppercase tracking-[0.25em] text-stone-400">
+                <a href="#catalogo" class="hover:text-goth-crimson transition-colors">La Colección</a>
+                <a href="#chatbot-section" class="hover:text-goth-crimson transition-colors">Reembolsos & Ritos</a>
+                <a href="#garantia" class="hover:text-goth-crimson transition-colors">Pacto de Calidad</a>
+            </div>
+            <div>
+                <span class="px-3.5 py-1.5 bg-goth-blood/10 text-goth-crimson text-[10px] font-black tracking-widest uppercase rounded-lg border border-goth-blood/30">
+                    Estilo Gótico Eterno
+                </span>
+            </div>
+        </div>
+    </header>
+
+    <!-- SECCIÓN HERO DE BIENVENIDA -->
+    <section class="relative py-20 px-4 sm:px-6 lg:px-8 overflow-hidden border-b border-goth-blood/20">
+        <!-- Textura de fondo gótica -->
+        <div class="absolute inset-0 opacity-10 bg-[radial-gradient(#b91c1c_1px,transparent_1px)] [background-size:20px_20px] pointer-events-none"></div>
+        
+        <div class="max-w-7xl mx-auto text-center relative z-10 space-y-6">
+            <span class="text-xs font-bold uppercase tracking-[0.4em] text-goth-crimson block mb-2">Fundada en las Sombras del Confort</span>
+            <h1 class="font-gothic text-5xl sm:text-8xl font-black text-white tracking-widest leading-none drop-shadow-[0_5px_15px_rgba(185,28,28,0.2)]">
+                MUEBLERÍA ORTIZ
+            </h1>
+            <p class="font-serif text-lg sm:text-2xl text-goth-pewter/85 italic max-w-3xl mx-auto font-light mt-4">
+                "Mobiliario ancestral labrado en maderas eternas y terciopelos del inframundo."
+            </p>
+            <div class="w-36 h-[1px] bg-gradient-to-r from-transparent via-goth-crimson to-transparent mx-auto my-6"></div>
+            <p class="text-xs sm:text-sm text-stone-400 max-w-xl mx-auto leading-relaxed">
+                Si alguna de nuestras piezas inmortales ha sufrido una alteración o desear realizar un reclamo, invoca nuestro canal de reembolso cibernético a continuación.
+            </p>
+        </div>
+    </section>
+
+    <!-- SECCIÓN INTERACTIVA DE CHATBOT (WORKSPACE) -->
+    <main id="chatbot-section" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 flex-grow w-full grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        
+        <!-- PANEL DE LEYENDAS Y REGLAS (COL: 5) -->
+        <div class="lg:col-span-5 bg-goth-charcoal/80 border border-goth-blood/30 rounded-3xl p-6 sm:p-8 space-y-6 shadow-2xl relative overflow-hidden">
+            <!-- Detalles de diseño gótico -->
+            <div class="absolute -top-12 -left-12 w-24 h-24 rounded-full bg-goth-blood/10 blur-xl"></div>
+            
+            <div class="border-b border-goth-blood/20 pb-4">
+                <h2 class="font-gothic text-md font-bold text-goth-crimson uppercase tracking-widest flex items-center gap-2">
+                    <i data-lucide="shield-alert" class="w-5 h-5"></i>
+                    El Pacto de Retorno
+                </h2>
+                <p class="text-[10px] text-stone-500 uppercase font-bold tracking-wider mt-1">Nuestras solemnes condiciones de reembolso</p>
+            </div>
+
+            <div class="space-y-4 text-xs leading-relaxed">
+                <div class="p-4 bg-goth-stone/40 border-l-2 border-goth-crimson rounded-xl">
+                    <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-1">Daños de Tránsito o Posesión</h4>
+                    <p class="text-stone-400">Si los relieves góticos, el cuero curtido o la estructura de roble llegaron astillados de la cripta de reparto, aplicaremos la redención total.</p>
+                </div>
+
+                <div class="p-4 bg-goth-stone/40 border-l-2 border-goth-crimson rounded-xl">
+                    <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-1">Disconformidad Estética</h4>
+                    <p class="text-stone-400">Dispones de un ciclo de 15 lunas desde la entrega para reportar insatisfacción con los colores oscuros o dimensiones.</p>
+                </div>
+
+                <div class="p-4 bg-goth-stone/40 border-l-2 border-goth-crimson rounded-xl">
+                    <h4 class="font-bold text-white uppercase tracking-wider text-[11px] mb-1">Ritual de Reembolso</h4>
+                    <p class="text-stone-400">Escribe tu problema en el oráculo de la derecha. Te asignaremos de inmediato la clave de acceso de atención al cliente directa.</p>
+                </div>
+            </div>
+
+            <div class="pt-4 border-t border-goth-blood/20 flex items-center justify-between text-[11px] text-stone-500 font-bold">
+                <span class="flex items-center gap-1"><i data-lucide="skull" class="w-3.5 h-3.5 text-goth-crimson"></i> Mueblería Ortiz</span>
+                <span>Desde 1888</span>
+            </div>
+        </div>
+
+        <!-- CHATBOT INTERACTIVO (COL: 7) -->
+        <div class="lg:col-span-7 bg-goth-charcoal border border-goth-blood/30 rounded-3xl shadow-2xl flex flex-col h-[580px] overflow-hidden relative">
+            
+            <!-- CABECERA DEL CHATBOT -->
+            <div class="bg-goth-black border-b border-goth-blood/30 px-6 py-4 flex items-center justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="relative">
+                        <div class="p-2.5 bg-goth-blood/20 rounded-xl text-goth-crimson">
+                            <i data-lucide="ghost" class="w-5 h-5"></i>
+                        </div>
+                        <span class="absolute bottom-0 right-0 w-3 h-3 bg-goth-crimson border-2 border-goth-black rounded-full animate-pulse"></span>
+                    </div>
+                    <div>
+                        <h3 class="font-gothic text-xs tracking-widest text-white uppercase">El Oráculo Ortiz</h3>
+                        <p class="text-[10px] text-stone-500 font-bold uppercase tracking-wider">Asistente de Reclamaciones</p>
+                    </div>
+                </div>
+
+                <div class="flex items-center gap-2">
+                    <!-- Velas estéticas animadas -->
+                    <div class="flex items-end gap-1 px-3 py-1 bg-goth-stone/40 rounded-lg border border-goth-blood/25 text-goth-crimson">
+                        <span class="w-1.5 h-4 bg-goth-crimson rounded-t-full candle-flicker block"></span>
+                        <span class="w-1.5 h-3.5 bg-goth-crimson rounded-t-full candle-flicker block" style="animation-delay: 0.5s;"></span>
+                        <span class="w-1.5 h-5 bg-goth-crimson rounded-t-full candle-flicker block" style="animation-delay: 1s;"></span>
+                    </div>
+                    <button onclick="reiniciarConversacion()" class="p-2 hover:bg-goth-stone rounded-lg text-stone-400 hover:text-white transition-colors" title="Limpiar y reiniciar chat">
+                        <i data-lucide="refresh-cw" class="w-4.5 h-4.5"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- CUERPO DE MENSAJES (SCROLLABLE) -->
+            <div id="pantalla-chat" class="flex-grow p-6 overflow-y-auto space-y-4 bg-goth-black/40 custom-scrollbar">
+                <!-- Se llenará dinámicamente con JS -->
+            </div>
+
+            <!-- ENTRADAS RÁPIDAS / CHIPS -->
+            <div id="caja-sugerencias" class="px-6 py-2 bg-goth-black/60 border-t border-goth-blood/10 flex flex-wrap gap-2">
+                <!-- Se llenará con chips rápidos -->
+            </div>
+
+            <!-- FORMULARIO DE ENVÍO -->
+            <form id="formulario-chat" onsubmit="enviarMensajeUsuario(event)" class="p-4 bg-goth-black border-t border-goth-blood/30 flex gap-2">
+                <input type="text" id="mensaje-input" placeholder="Confiesa el problema de tu mobiliario..." 
+                       class="flex-grow px-4 py-3 bg-goth-stone border border-goth-blood/30 rounded-xl focus:ring-2 focus:ring-goth-crimson/50 focus:border-goth-crimson outline-none text-xs sm:text-sm text-stone-200 transition-all font-medium placeholder-stone-600" required>
+                <button type="submit" class="px-4 bg-goth-blood hover:bg-goth-crimson text-white rounded-xl transition-all shadow-lg shadow-goth-blood/20 flex items-center justify-center">
+                    <i data-lucide="send" class="w-4 h-4"></i>
+                </button>
+            </form>
+        </div>
+
+    </main>
+
+    <!-- GALERÍA GÓTICA EXTRA (PRODUCTOS) -->
+    <section id="catalogo" class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 border-t border-goth-blood/20 mt-12">
+        <div class="text-center mb-12">
+            <h2 class="font-gothic text-2xl sm:text-3xl text-white tracking-widest">Nuestra Cripta de Diseños</h2>
+            <p class="text-[10px] text-goth-crimson uppercase tracking-[0.3em] font-bold mt-1">Modelos más aclamados para tu mausoleo privado</p>
+        </div>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8">
+            <!-- Mueble 1 -->
+            <div class="bg-goth-charcoal border border-goth-blood/30 rounded-2xl overflow-hidden hover:border-goth-crimson transition-all duration-500 group shadow-lg">
+                <div class="h-64 bg-goth-black flex items-center justify-center relative p-8">
+                    <!-- Icono representativo de alta fidelidad -->
+                    <svg class="w-24 h-24 text-goth-blood group-hover:scale-110 transition-transform duration-500" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2">
+                        <path d="M4 18v3M20 18v3M4 11h16M4 15h16M4 11V6a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v5" stroke-linecap="round"/>
+                    </svg>
+                    <span class="
